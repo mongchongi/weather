@@ -9,13 +9,21 @@ const OPEN_WEATHER_API_KEY = import.meta.env.VITE_OPEN_WEATHER_API_KEY;
 
 const App = () => {
   const [weather, setWeather] = useState(null);
+  const [city, setCity] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const cities = ['seoul', 'tokyo', 'paris', 'new york'];
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
     const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric`;
 
+    setIsLoading(true);
+
     const response = await fetch(url);
     const data = await response.json();
     setWeather(data);
+
+    setIsLoading(false);
   };
 
   const getCurrentLocation = () => {
@@ -26,20 +34,42 @@ const App = () => {
     });
   };
 
+  const getWeatherByCity = async () => {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${OPEN_WEATHER_API_KEY}&units=metric`;
+
+    setIsLoading(true);
+
+    const response = await fetch(url);
+    const data = await response.json();
+    setWeather(data);
+
+    setIsLoading(false);
+  };
+
   useEffect(() => {
-    getCurrentLocation();
-  }, []);
+    if (!city) {
+      getCurrentLocation();
+    } else {
+      getWeatherByCity();
+    }
+  }, [city]);
 
   return (
     <div className='container'>
-      <div className='location'>
-        <FontAwesomeIcon icon={faLocationDot} />
-        <p className='location__name'>{weather?.name}</p>
-      </div>
-      <div className='weather-section'>
-        <Weather weather={weather} />
-        <City />
-      </div>
+      {isLoading ? (
+        <div className='loading-spinner'></div>
+      ) : (
+        <>
+          <div className='location'>
+            <FontAwesomeIcon icon={faLocationDot} />
+            <p className='location__name'>{weather?.name}</p>
+          </div>
+          <div className='weather-section'>
+            <Weather weather={weather} />
+            <City cities={cities} city={city} setCity={setCity} />
+          </div>
+        </>
+      )}
     </div>
   );
 };
