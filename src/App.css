@@ -1,0 +1,145 @@
+body {
+  background: rgba(138, 138, 138, 1);
+  background: radial-gradient(circle, rgba(138, 138, 138, 1) 0%, rgba(46, 46, 46, 1) 60%, rgba(7, 7, 7, 1) 100%);
+  color: rgba(182, 182, 182, 1);
+}
+
+.container {
+  padding: 24px 64px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.location__name {
+  padding-top: 3px;
+}
+
+.weather-section {
+  display: flex;
+  align-items: start;
+}
+
+.weather {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.weather__celsius {
+  color: rgba(255, 255, 255, 1);
+  font-size: 96px;
+  margin: 0;
+}
+
+.weather__fahrenheit {
+  font-size: 24px;
+  margin: 0;
+}
+
+.weather__description {
+  font-size: 32px;
+  margin: 24px 0;
+}
+
+.weather__details {
+  display: flex;
+  gap: 32px;
+}
+
+.weather__wind h4,
+.weather__humidity h4 {
+  font-size: 12px;
+}
+
+.weather__wind p,
+.weather__humidity p {
+  font-size: 24px;
+}
+
+.weather__condition {
+  width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
+.city {
+  border: 1px solid rgba(66, 66, 66, 1);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 8px;
+  padding: 16px;
+}
+
+.city__button {
+  border: none;
+  background: transparent;
+  text-align: start;
+  color: rgba(182, 182, 182, 1);
+  padding: 3px 0 0 8px;
+  cursor: pointer;
+}
+
+.city__button--active {
+  color: rgba(255, 255, 255, 255);
+  border-left: 3px solid rgba(221, 117, 85, 1);
+}
+
+@media all and (max-width: 774px) {
+  .weather-section {
+    display: block;
+  }
+
+  .city {
+    width: 100%;
+  }
+}
+
+@media all and (max-width: 637px) {
+  .weather {
+    display: block;
+  }
+}
+
+@media all and (max-width: 428px) {
+  .container {
+    padding: 8px 32px 24px;
+  }
+
+  .weather__celsius {
+    font-size: 64px;
+  }
+
+  .weather__fahrenheit {
+    font-size: 16px;
+  }
+
+  .weather__description {
+    font-size: 24px;
+    margin: 16px 0 0;
+  }
+
+  .weather__wind h4,
+  .weather__humidity h4 {
+    font-size: 10px;
+  }
+
+  .weather__wind p,
+  .weather__humidity p {
+    font-size: 16px;
+  }
+
+  .weather__condition {
+    width: 80%;
+  }
+}
