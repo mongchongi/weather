@@ -4,6 +4,13 @@ body {
   color: rgba(182, 182, 182, 1);
 }
 
+button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: rgba(182, 182, 182, 1);
+}
+
 .container {
   padding: 24px 64px;
   min-height: 100vh;
@@ -35,11 +42,38 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 32px;
+  margin-bottom: 8px;
+}
+
+.location__info {
+  display: flex;
+  align-items: center;
   gap: 3px;
 }
 
 .location__name {
   padding-top: 3px;
+}
+
+.location__search {
+  display: flex;
+}
+
+.location__search-button {
+  padding-top: 5px;
+}
+
+.location__search-input {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 1);
+  outline: none;
+  padding-top: 5px;
+}
+
+.location__search-input::placeholder {
+  color: rgba(182, 182, 182, 1);
 }
 
 .weather-section {
@@ -101,12 +135,8 @@ body {
 }
 
 .city__button {
-  border: none;
-  background: transparent;
   text-align: start;
-  color: rgba(182, 182, 182, 1);
   padding: 3px 0 0 8px;
-  cursor: pointer;
 }
 
 .city__button--active {
@@ -127,6 +157,14 @@ body {
 @media all and (max-width: 637px) {
   .weather {
     display: block;
+  }
+}
+
+@media all and (max-width: 493px) {
+  .location {
+    flex-direction: column;
+    gap: unset;
+    margin-bottom: 24px;
   }
 }
 

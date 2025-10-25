@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import Weather from './components/Weather';
 import City from './components/City';
 
@@ -11,6 +11,8 @@ const App = () => {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+
+  const searchInputRef = useRef(null);
 
   const cities = ['seoul', 'tokyo', 'paris', 'new york'];
 
@@ -46,6 +48,18 @@ const App = () => {
     setIsLoading(false);
   };
 
+  const handleSearchLocation = (e) => {
+    e.preventDefault();
+
+    if (!searchInputRef.current.value) {
+      alert('Enter the location you want to search.');
+    } else {
+      setCity(searchInputRef.current.value);
+    }
+
+    searchInputRef.current.value = '';
+  };
+
   useEffect(() => {
     if (!city) {
       getCurrentLocation();
@@ -61,8 +75,16 @@ const App = () => {
       ) : (
         <>
           <div className='location'>
-            <FontAwesomeIcon icon={faLocationDot} />
-            <p className='location__name'>{weather?.name}</p>
+            <div className='location__info'>
+              <FontAwesomeIcon icon={faLocationDot} />
+              <p className='location__name'>{weather?.name}</p>
+            </div>
+            <form className='location__search' onSubmit={handleSearchLocation}>
+              <button className='location__search-button' type='submit'>
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </button>
+              <input className='location__search-input' type='text' placeholder='Search...' ref={searchInputRef} />
+            </form>
           </div>
           <div className='weather-section'>
             <Weather weather={weather} />
